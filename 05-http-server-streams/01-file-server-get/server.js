@@ -12,7 +12,6 @@ server.on('request', (req, res) => {
     res.end('Nested path error');
     return;
   }
-  console.log('sdsd');
 
   const filepath = path.join(__dirname, 'files', pathname);
   switch (req.method) {
