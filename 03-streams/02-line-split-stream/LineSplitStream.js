@@ -13,10 +13,7 @@ class LineSplitStream extends stream.Transform {
     const lines = str.split(os.EOL);
     const lastLine = lines.pop();
     this.remainder = '';
-
-    for (const line of lines) {
-      this.push(line);
-    }
+    lines.forEach((line) => this.push(line));
 
     if (str.endsWith(os.EOL)) {
       this.push(lastLine);
