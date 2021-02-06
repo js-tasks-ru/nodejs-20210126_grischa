@@ -7,7 +7,7 @@ const server = new http.Server();
 
 server.on('request', (req, res) => {
   const pathname = url.parse(req.url).pathname.slice(1);
-  if (pathname.indexOf(path.sep) !== -1) {
+  if (pathname.indexOf('/') !== -1) {
     res.statusCode = 400;
     res.end('Nested path error');
   }
