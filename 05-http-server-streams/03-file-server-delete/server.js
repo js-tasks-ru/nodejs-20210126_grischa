@@ -21,7 +21,12 @@ server.on('request', (req, res) => {
         res.end(`File ${filepath} nor found.`);
         return;
       }
-      fs.unlink(filepath, () => {
+      fs.unlink(filepath, (err) => {
+        if (err) {
+          res.statusCode = 500;
+          res.end('Server error');
+          return;
+        }
         res.statusCode = 200;
         res.end('Ok');
       });
