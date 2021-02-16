@@ -16,15 +16,15 @@ server.on('request', (req, res) => {
         res.end('Nested path error');
         return;
       }
-      if (fs.existsSync(filepath) === false) {
-        res.statusCode = 404;
-        res.end(`File ${filepath} nor found.`);
-        return;
-      }
       fs.unlink(filepath, (err) => {
         if (err) {
-          res.statusCode = 500;
-          res.end('Server error');
+          if (err.code === 'ENOENT') {
+            res.statusCode = 404;
+            res.end(`File ${filepath} nor found.`);
+          } else {
+            res.statusCode = 500;
+            res.end(`File ${filepath} nor found.`);
+          }
           return;
         }
         res.statusCode = 200;
