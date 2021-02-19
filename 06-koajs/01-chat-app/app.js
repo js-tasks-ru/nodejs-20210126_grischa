@@ -20,10 +20,7 @@ router.get('/subscribe', async (ctx, next) => {
     });
   });
 
-  promise.then((message) => {
-    ctx.body = message;
-  });
-  return await promise;
+  ctx.body = await promise;
 });
 
 router.post('/publish', async (ctx, next) => {
